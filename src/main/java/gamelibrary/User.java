@@ -7,5 +7,8 @@ public abstract class User {
         this.username = username;
     }
 
+    /**
+     * Displays the available options for either a regular user or manager
+     */
     public abstract void displayMenu();
 }
