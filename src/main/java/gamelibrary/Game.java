@@ -1,5 +1,7 @@
 package gamelibrary;
 
+import java.util.Objects;
+
 public class Game implements Comparable<Game> {
     private String title;
     private String genre;
@@ -29,5 +31,59 @@ public class Game implements Comparable<Game> {
     @Override
     public int compareTo(Game o) {
         return this.title.compareTo(o.title);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Game game = (Game) o;
+        return releaseYear == game.releaseYear && Objects.equals(title, game.title) && Objects.equals(genre, game.genre) && Objects.equals(platform, game.platform);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, genre, platform, releaseYear);
+    }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "genre='" + genre + '\'' +
+                ", title='" + title + '\'' +
+                ", platform='" + platform + '\'' +
+                ", releaseYear=" + releaseYear +
+                '}';
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public String getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(String platform) {
+        this.platform = platform;
+    }
+
+    public int getReleaseYear() {
+        return releaseYear;
+    }
+
+    public void setReleaseYear(int releaseYear) {
+        this.releaseYear = releaseYear;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

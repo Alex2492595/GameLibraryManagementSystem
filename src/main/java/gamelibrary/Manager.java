@@ -35,4 +35,11 @@ public class Manager extends User {
     public void displayMenu() {
         //TODO
     }
+
+    @Override
+    public String toString() {
+        return "Manager{" +
+                "username='" + username + '\'' +
+                '}';
+    }
 }
