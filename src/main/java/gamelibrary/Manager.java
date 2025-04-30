@@ -9,22 +9,30 @@ public class Manager extends User {
      * Adds a game to the available games to be purchased
      * @param game the game to be added
      */
-    public void addGame(Game game) {}
+    public void addGame(Game game) {
+        //TODO
+    }
 
     /**
      * Removes a game from the available games to be purchased
      * @param game the game to be removed
      */
-    public void removeGame(Game game) {}
+    public void removeGame(Game game) {
+        //TODO
+    }
 
     /**
      * Displays the available games that the manager can edit
      */
-    public void viewAllGames() {}
+    public void viewAllGames() {
+        //TODO
+    }
 
     /**
      * Displays the available options for the manager
      */
     @Override
-    public void displayMenu() {}
+    public void displayMenu() {
+        //TODO
+    }
 }
