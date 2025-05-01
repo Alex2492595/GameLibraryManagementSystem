@@ -10,7 +10,15 @@ public class Manager extends User {
      * @param game the game to be added
      */
     public void addGame(Game game) {
-        //TODO
+        //TODO: Uses the GameDataController to load/save available games (Deliverable 3)
+        /*
+        List<Game> games = GameDataController.loadAvailableGames();
+
+        games.add(game);
+        GameDataController.saveAvailableGames(games);
+
+        System.out.println(game.getTitle() + " added to catalog.");
+         */
     }
 
     /**
@@ -18,14 +26,35 @@ public class Manager extends User {
      * @param game the game to be removed
      */
     public void removeGame(Game game) {
-        //TODO
+        //TODO: Uses the GameDataController to load/save available games (Deliverable 3)
+        /*
+        List<Game> games = GameDataController.loadAvailableGames();
+
+        if (games.remove(game)) {
+            GameDataController.saveAvailableGames(games);
+            System.out.println(game.getTitle() + " removed from catalog.");
+        } else {
+            System.out.println("Game not found.");
+        }
+         */
     }
 
     /**
      * Displays the available games that the manager can edit
      */
     public void viewAllGames() {
-        //TODO
+        //TODO: Loads available games from GameDataController (Deliverable 3)
+        /*
+        List<Game> games = GameDataController.loadAvailableGames();
+
+        if (games.isEmpty()) {
+            System.out.println("No available games found.");
+        } else {
+            for (Game game : games) {
+                System.out.println(game.getDetails());
+            }
+        }
+         */
     }
 
     /**
@@ -33,7 +62,11 @@ public class Manager extends User {
      */
     @Override
     public void displayMenu() {
-        //TODO
+        System.out.println("Welcome, Manager " + getUsername() + "!");
+        System.out.println("1. View All Games");
+        System.out.println("2. Add New Game");
+        System.out.println("3. Remove Game");
+        System.out.println("4. Exit");
     }
 
     @Override

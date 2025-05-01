@@ -84,7 +84,7 @@ public class RegularUser extends User {
      */
     @Override
     public void displayMenu() {
-        System.out.println("Welcome, " + getUsername() + "!");
+        System.out.println("Welcome, User " + getUsername() + "!");
         System.out.println("1. Browse Games");
         System.out.println("2. View Library");
         System.out.println("3. Purchase Game");

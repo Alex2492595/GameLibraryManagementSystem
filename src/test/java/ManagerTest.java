@@ -3,21 +3,16 @@ import org.junit.jupiter.api.Test;
 public class ManagerTest {
     @Test
     public void testAddGame() {
-        //TODO
+        //TODO: To be tested in Deliverable 3
     }
 
     @Test
     public void testRemoveGame() {
-        //TODO
+        //TODO: To be tested in Deliverable 3
     }
 
     @Test
     public void testViewAllGames() {
-        //TODO
-    }
-
-    @Test
-    public void testDisplayMenu() {
-        //TODO
+        //TODO: To be tested in Deliverable 3
     }
 }
