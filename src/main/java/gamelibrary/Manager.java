@@ -1,5 +1,7 @@
 package gamelibrary;
 
+import java.util.List;
+
 public class Manager extends User {
     public Manager(String username) {
         super(username);
@@ -10,15 +12,16 @@ public class Manager extends User {
      * @param game the game to be added
      */
     public void addGame(Game game) {
-        //TODO: Uses the GameDataController to load/save available games (Deliverable 3)
-        /*
         List<Game> games = GameDataController.loadAvailableGames();
 
-        games.add(game);
-        GameDataController.saveAvailableGames(games);
+        if (!games.contains(game)) {
+            games.add(game);
+            GameDataController.saveAvailableGames(games);
 
-        System.out.println(game.getTitle() + " added to catalog.");
-         */
+            System.out.println(game.getTitle() + " added to catalog.");
+        } else {
+            System.out.println("Game already exists.");
+        }
     }
 
     /**
@@ -26,8 +29,6 @@ public class Manager extends User {
      * @param game the game to be removed
      */
     public void removeGame(Game game) {
-        //TODO: Uses the GameDataController to load/save available games (Deliverable 3)
-        /*
         List<Game> games = GameDataController.loadAvailableGames();
 
         if (games.remove(game)) {
@@ -36,15 +37,12 @@ public class Manager extends User {
         } else {
             System.out.println("Game not found.");
         }
-         */
     }
 
     /**
      * Displays the available games that the manager can edit
      */
     public void viewAllGames() {
-        //TODO: Loads available games from GameDataController (Deliverable 3)
-        /*
         List<Game> games = GameDataController.loadAvailableGames();
 
         if (games.isEmpty()) {
@@ -54,7 +52,6 @@ public class Manager extends User {
                 System.out.println(game.getDetails());
             }
         }
-         */
     }
 
     /**

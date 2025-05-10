@@ -1,18 +1,31 @@
+import gamelibrary.Game;
+import gamelibrary.GameDataController;
+import gamelibrary.Manager;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 public class ManagerTest {
     @Test
     public void testAddGame() {
-        //TODO: To be tested in Deliverable 3
+        Game game = new Game("Minecraft", "Sandbox", "PC", 2011);
+        Manager manager = new Manager("Alex");
+
+        manager.addGame(game);
+        List<Game> games = GameDataController.loadAvailableGames();
+
+        Assertions.assertTrue(games.contains(game));
     }
 
     @Test
     public void testRemoveGame() {
-        //TODO: To be tested in Deliverable 3
-    }
+        Game game = new Game("Minecraft", "Sandbox", "PC", 2011);
+        Manager manager = new Manager("Alex");
 
-    @Test
-    public void testViewAllGames() {
-        //TODO: To be tested in Deliverable 3
+        manager.removeGame(game);
+        List<Game> games = GameDataController.loadAvailableGames();
+
+        Assertions.assertFalse(games.contains(game));
     }
 }

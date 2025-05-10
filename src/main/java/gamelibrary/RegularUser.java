@@ -2,6 +2,7 @@ package gamelibrary;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class RegularUser extends User {
@@ -16,15 +17,16 @@ public class RegularUser extends User {
      * Displays the available games that the user can purchase
      */
     public void browseGames() {
-        List<Game> games = new ArrayList<>();
-        games.add(new Game("Minecraft", "Sandbox", "PC", 2011));
-        games.add(new Game("Elden Ring", "RPG", "PC", 2022));
+        List<Game> games = GameDataController.loadAvailableGames();
+
+        if (games.isEmpty()) {
+            System.out.println("No games available.");
+            return;
+        }
 
         for (Game game : games) {
             System.out.println(game.getDetails());
         }
-
-        //TODO: Reads from GameDataController instead (Deliverable 3)
     }
 
     /**
@@ -32,9 +34,23 @@ public class RegularUser extends User {
      * @param game the game to be purchased
      */
     public void purchaseGame(Game game) {
+        for (OwnedGame g : library) {
+            if (g.getGame().equals(game)) {
+                System.out.println("Game already owned.");
+                return;
+            }
+        }
+
         OwnedGame ownedGame = new OwnedGame(game);
         library.add(ownedGame);
+
         System.out.println(game.getTitle() + " purchased and added to library.");
+
+        Map<String, List<OwnedGame>> userLibraries = GameDataController.loadUserLibraries();
+        userLibraries.putIfAbsent(username, new ArrayList<>());
+        userLibraries.get(username).add(ownedGame);
+
+        GameDataController.saveUserLibraries(userLibraries);
     }
 
     /**
@@ -46,6 +62,14 @@ public class RegularUser extends User {
             System.out.println(game.getGame().getTitle() + " removed from library.");
         } else {
             System.out.println("Game not found in library.");
+        }
+
+        Map<String, List<OwnedGame>> userLibraries = GameDataController.loadUserLibraries();
+        List<OwnedGame> games = userLibraries.get(username);
+
+        if (games != null) {
+            games.remove(game);
+            GameDataController.saveUserLibraries(userLibraries);
         }
     }
 
@@ -60,8 +84,26 @@ public class RegularUser extends User {
             return;
         }
 
-        //TODO: Calls the rateGame method from OwnedGame (Deliverable 3)
+        if (rating < 1 || rating > 10) {
+            System.out.println("Invalid rating. Enter a number from 1 to 10.");
+            return;
+        }
+
+        game.setRating(rating);
         System.out.println(game.getGame().getTitle() + " rated successfully.");
+
+        Map<String, List<OwnedGame>> userLibraries = GameDataController.loadUserLibraries();
+        List<OwnedGame> games = userLibraries.get(username);
+
+        if (games != null) {
+            for (OwnedGame g : games) {
+                if (g.getGame().equals(game.getGame())) {
+                    g.setRating(rating);
+                }
+            }
+
+            GameDataController.saveUserLibraries(userLibraries);
+        }
     }
 
     /**

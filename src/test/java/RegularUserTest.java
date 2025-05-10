@@ -20,6 +20,17 @@ public class RegularUserTest {
     }
 
     @Test
+    public void testPurchaseGameDuplicate() {
+        Game game = new Game("Minecraft", "Sandbox", "PC", 2011);
+        RegularUser user = new RegularUser("Alex");
+
+        user.purchaseGame(game);
+        user.purchaseGame(game);
+
+        Assertions.assertEquals(1, user.getLibrary().size());
+    }
+
+    @Test
     public void testRemoveGameSuccess() {
         RegularUser user = new RegularUser("Alex");
         Game game = new Game("Minecraft", "Sandbox", "PC", 2011);
@@ -43,13 +54,29 @@ public class RegularUserTest {
     }
 
     @Test
-    public void testRateGame() {
+    public void testRateGameValid() {
         RegularUser user = new RegularUser("Alex");
         Game game = new Game("Minecraft", "Sandbox", "PC", 2011);
-        OwnedGame ownedGame = new OwnedGame(game);
+
+        user.purchaseGame(game);
+        OwnedGame ownedGame = user.getLibrary().get(0);
 
         user.rateGame(ownedGame, 8);
 
-        //TODO: Rating not yet fully implemented (Deliverable 3)
+        Assertions.assertEquals(8, ownedGame.getRating());
+    }
+
+    @Test
+    public void testRateGameInvalid() {
+        RegularUser user = new RegularUser("Alex");
+        Game game = new Game("Minecraft", "Sandbox", "PC", 2011);
+
+        user.purchaseGame(game);
+        OwnedGame ownedGame = user.getLibrary().get(0);
+
+        user.rateGame(ownedGame, 20);
+
+        Assertions.assertNotEquals(20, ownedGame.getRating());
+        Assertions.assertEquals(0, ownedGame.getRating());
     }
 }

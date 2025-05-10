@@ -27,7 +27,7 @@ public class GameDataControllerTest {
         List<Game> loadedGames = GameDataController.loadAvailableGames();
 
         Assertions.assertEquals(2, loadedGames.size());
-        Assertions.assertEquals("GTA 6", games.get(0).getTitle());
+        Assertions.assertEquals("GTA 6", loadedGames.get(0).getTitle());
     }
 
     @Test
