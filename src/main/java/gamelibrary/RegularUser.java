@@ -90,6 +90,7 @@ public class RegularUser extends User {
         }
 
         game.setRating(rating);
+        game.getGame().addRating(rating);
         System.out.println(game.getGame().getTitle() + " rated successfully.");
 
         Map<String, List<OwnedGame>> userLibraries = GameDataController.loadUserLibraries();

@@ -7,12 +7,16 @@ public class Game implements Comparable<Game> {
     private String genre;
     private String platform;
     private int releaseYear;
+    private int totalRating;
+    private int ratingCount;
 
     public Game(String title, String genre, String platform, int releaseYear) {
         this.title = title;
         this.genre = genre;
         this.platform = platform;
         this.releaseYear = releaseYear;
+        this.totalRating = 0;
+        this.ratingCount = 0;
     }
 
     /**
@@ -20,7 +24,28 @@ public class Game implements Comparable<Game> {
      * @return the string representation of the game's details
      */
     public String getDetails() {
-        return "Title: " + title + ", Genre: " + genre + ", Platform: " + platform + ", Release Year: " + releaseYear;
+        return "Title: " + title + ", Genre: " + genre + ", Platform: " + platform + ", Release Year: " + releaseYear + ", Average Rating: " + String.format("%.1f", getAverageRating()) + ", Rating Count: " + ratingCount;
+    }
+
+    /**
+     * Adds the user rating by increasing the total rating for the game and its rating count
+     * @param rating the rating to add
+     */
+    public void addRating(int rating) {
+        totalRating += rating;
+        ratingCount++;
+    }
+
+    /**
+     * Calculates the average rating of the game
+     * @return the average rating
+     */
+    public double getAverageRating() {
+        if (ratingCount == 0) {
+            return 0;
+        }
+
+        return (double) totalRating / ratingCount;
     }
 
     /**
@@ -52,6 +77,8 @@ public class Game implements Comparable<Game> {
                 ", title='" + title + '\'' +
                 ", platform='" + platform + '\'' +
                 ", releaseYear=" + releaseYear +
+                ", totalRating=" + totalRating +
+                ", ratingCount=" + ratingCount +
                 '}';
     }
 
@@ -85,5 +112,21 @@ public class Game implements Comparable<Game> {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getRatingCount() {
+        return ratingCount;
+    }
+
+    public void setRatingCount(int ratingCount) {
+        this.ratingCount = ratingCount;
+    }
+
+    public int getTotalRating() {
+        return totalRating;
+    }
+
+    public void setTotalRating(int totalRating) {
+        this.totalRating = totalRating;
     }
 }
